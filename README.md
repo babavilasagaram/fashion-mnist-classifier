@@ -98,7 +98,7 @@ ReLU + Dropout
 Linear(64 → 10)
         ↓
 Output
-
+```
 The CNN achieved the best overall test performance.
 
 ## 📊 Results
@@ -189,8 +189,7 @@ The official training set was divided into:
 12,000 → Validation
 
 10,000 → Official Test Set
-
-```text
+```
 
 ## 🏗️ Application Architecture
 
@@ -226,7 +225,7 @@ The application follows a simple client-server architecture.
                             ▼
                        Prediction
 
-
+```
 ## 🌐 Web Application
 
 The React frontend provides an interactive interface for model inference.
@@ -253,7 +252,7 @@ The backend is implemented using **FastAPI**.
 
 ```http
 GET /health
-
+```
 
 ## 📁 Project Structure
 
@@ -277,8 +276,9 @@ fashion-mnist-classifier/
 │   └── mlp_best_model.pth
 │
 ├── notebooks/
-│   ├── CNN_MNIST.ipynb
-│   └── MLP_MNIST.ipynb
+│   ├── CNN_Mnist.ipynb
+│   ├── Gpu_pytorch (1).ipynb
+│   └── MINST.ipynb
 │
 ├── tests/
 │   ├── test_api.py
@@ -293,7 +293,7 @@ fashion-mnist-classifier/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-
+```
 
 ## ⚙️ Local Setup
 
@@ -302,13 +302,64 @@ fashion-mnist-classifier/
 - Python 3.11+
 - Node.js and npm
 - Git
+- Docker Desktop (optional)
 
 ### 1. Clone the repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone https://github.com/babavilasagaram/fashion-mnist-classifier.git
 cd fashion-mnist-classifier
+```
 
+### 2. Create a Python environment
+
+```bash
+python -m venv .venv
+```
+
+Activate it on Windows:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Start the FastAPI backend
+
+```bash
+uvicorn api.main:app --reload
+```
+
+The API will be available at:
+
+```text
+http://127.0.0.1:8000
+```
+
+Swagger documentation:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+### 5. Start the frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend will be available at:
+
+```text
+http://localhost:8080
+```
 
 ## 🐳 Docker
 
@@ -320,18 +371,41 @@ From the project root:
 
 ```bash
 docker build -t fashion-mnist-api .
+```
 
-
-## 🧪 Testing
-
-The project includes automated API tests using **pytest**.
-
-Run the tests with:
+### Run the container
 
 ```bash
+docker run -p 8000:8000 fashion-mnist-api
+```
+
+The API will then be available at:
+
+```text
+http://127.0.0.1:8000
+```
+
+Swagger documentation:
+
+```text
+http://127.0.0.1:8000/docs
+```
 pytest
+```
 
+The test suite covers:
 
+- Health check
+- CNN prediction
+- MLP prediction
+- Invalid model handling
+- Invalid file type handling
+
+Current result:
+
+```text
+5 passed
+```
 ## ⚠️ Limitations
 
 The models are trained specifically on Fashion-MNIST.
@@ -349,23 +423,6 @@ The confidence displayed by the application represents the model's **softmax out
 
 The application is primarily intended as a demonstration of an end-to-end machine learning inference system.
 
-
-## ⚠️ Limitations
-
-The models are trained specifically on Fashion-MNIST.
-
-Fashion-MNIST images are:
-
-- 28 × 28 pixels
-- Grayscale
-- Centered
-- Simple-background images
-
-Because of this, performance on arbitrary real-world photographs may be significantly lower.
-
-The confidence displayed by the application represents the model's **softmax output** and should not be interpreted as a calibrated probability.
-
-The application is primarily intended as a demonstration of an end-to-end machine learning inference system.
 
 ## 🚧 Future Improvements
 
@@ -422,3 +479,5 @@ React
 Docker
    ↓
 Deployable ML Application
+
+```
