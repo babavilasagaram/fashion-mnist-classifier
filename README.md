@@ -65,7 +65,7 @@ Linear(128 → 10)
 Output
 
 The MLP was optimized using Optuna.
-
+```
 ### CNN
 
 The CNN preserves the spatial structure of the image.
