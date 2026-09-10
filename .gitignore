@@ -1,0 +1,11 @@
+# Ignore all CSV datasets
+*.csv
+
+# Ignore images
+images/
+
+# Ignore Jupyter checkpoints
+.ipynb_checkpoints/
+
+__pycache__/
+*.pyc
