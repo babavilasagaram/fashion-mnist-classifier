@@ -246,26 +246,20 @@ The frontend communicates with the FastAPI backend through HTTP requests.
 
 ---
 
-## 4️⃣ Add screenshots
+## 🖥️ Application Preview
 
-Create a folder:
+### Model Selection
 
-```text
-screenshots/
-```
+![Model Selection](screenshots/homepage.png)
 
-Put 2–3 screenshots there, for example:
+### CNN Prediction
 
-```text
-screenshots/
-├── homepage.png
-├── cnn-prediction.png
-└── model-comparison.png
-```
+![CNN Prediction](screenshots/cnn-prediction.png)
 
-Then add:
+### Model Comparison
 
-```markdown
+![Model Comparison](screenshots/model-comparison.png)
+
 ## 🖥️ Application Preview
 
 ### Model Selection
