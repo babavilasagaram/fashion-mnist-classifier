@@ -244,6 +244,84 @@ The application allows the same image to be evaluated using both models and prov
 
 The frontend communicates with the FastAPI backend through HTTP requests.
 
+---
+
+## 4️⃣ Add screenshots
+
+Create a folder:
+
+```text
+screenshots/
+```
+
+Put 2–3 screenshots there, for example:
+
+```text
+screenshots/
+├── homepage.png
+├── cnn-prediction.png
+└── model-comparison.png
+```
+
+Then add:
+
+```markdown
+## 🖥️ Application Preview
+
+### Model Selection
+
+![Model Selection](screenshots/homepage.png)
+
+### Prediction
+
+![Prediction](screenshots/cnn-prediction.png)
+
+### Model Comparison
+
+![Model Comparison](screenshots/model-comparison.png)
+```
+
+This is **very valuable for GitHub** because recruiters can understand the project without running it.
+
+---
+
+
+# 🎯 Where your project stands now
+
+You went from:
+
+```text
+Notebook
+   ↓
+Model
+```
+
+to:
+
+```text
+                  GitHub
+                    │
+          ┌─────────┴─────────┐
+          ↓                   ↓
+       Vercel               Render
+          │                   │
+       React              Docker
+          │                   │
+          └────── HTTPS ──────┘
+                              │
+                           FastAPI
+                              │
+                       ┌──────┴──────┐
+                       ↓             ↓
+                      CNN           MLP
+                       │             │
+                       └──────┬──────┘
+                              ↓
+                         Prediction
+```
+
+That's a **legitimate end-to-end ML application**, not just a model notebook.
+
 ## 🔌 API
 
 The backend is implemented using **FastAPI**.
@@ -406,6 +484,34 @@ Current result:
 ```text
 5 passed
 ```
+
+
+That accurately matches your CPU deployment.
+
+---
+
+## 3️⃣ Add Deployment section
+
+Put this **after Docker**:
+
+````markdown
+## 🚀 Deployment
+
+The application is deployed using separate frontend and backend services.
+
+```text
+React Frontend
+      ↓
+    Vercel
+      ↓ HTTPS
+FastAPI Backend
+      ↓
+    Render
+      ↓
+Docker + PyTorch
+      ↓
+CNN / MLP Models
+
 ## ⚠️ Limitations
 
 The models are trained specifically on Fashion-MNIST.
@@ -481,3 +587,11 @@ Docker
 Deployable ML Application
 
 ```
+
+## 🚀 Live Demo
+
+**Live Application:** https://fashion-mnist-classifier-chi.vercel.app
+
+**API Documentation:** https://fashion-mnist-api-oq1v.onrender.com/docs
+
+The application runs a React frontend connected to a Dockerized FastAPI backend serving PyTorch models.
