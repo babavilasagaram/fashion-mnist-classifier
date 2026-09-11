@@ -2,7 +2,7 @@
 
 An end-to-end image classification application built with **PyTorch, FastAPI, React, and Docker**.
 
-The project compares a **Multilayer Perceptron (MLP)** with a **Convolutional Neural Network (CNN)**
+The project compares a **Multilayer Perceptron (MLP)** with a **Convolutional Neural Network (CNN)** on the Fashion-MNIST dataset.
 
 Users can upload an image through the web interface, select a model, and receive the predicted class, confidence score, and top-3 predictions.
 
@@ -10,7 +10,7 @@ Users can upload an image through the web interface, select a model, and receive
 
 ## 🚀 Project Overview
 
-This project demonstrates the complete machine learning workflow — from model development and hyperparameter tuning to API development, frontend integration, testing, and containerization.
+This project demonstrates a complete machine learning workflow — from model development and hyperparameter tuning to API development, frontend integration, testing, containerization, and deployment.
 
 ### Machine Learning
 
@@ -36,6 +36,7 @@ This project demonstrates the complete machine learning workflow — from model 
 - React frontend
 - Docker containerization
 - API testing with pytest
+- Cloud deployment
 
 ---
 
@@ -63,14 +64,15 @@ BatchNorm + ReLU + Dropout
 Linear(128 → 10)
     ↓
 Output
+```
 
 The MLP was optimized using Optuna.
-```
+
 ### CNN
 
 The CNN preserves the spatial structure of the image.
-```text
 
+```text
 Input: 1 × 28 × 28
         ↓
 Conv2D(1 → 32)
@@ -99,7 +101,10 @@ Linear(64 → 10)
         ↓
 Output
 ```
+
 The CNN achieved the best overall test performance.
+
+---
 
 ## 📊 Results
 
@@ -119,6 +124,8 @@ The CNN outperformed the MLP by **3.60 percentage points**.
 - MLP accuracy: **88.82%**
 - Model agreement: **90.28%**
 - Model disagreement: **972 samples**
+
+---
 
 ## 🔬 CNN Classification Performance
 
@@ -142,6 +149,8 @@ The most challenging class was **Shirt**:
 
 The lower performance on Shirt reflects the difficulty of distinguishing visually similar clothing categories in Fashion-MNIST.
 
+---
+
 ## 🎯 Hyperparameter Tuning
 
 **Optuna** was used to optimize the training configuration for both models.
@@ -157,7 +166,7 @@ The CNN hyperparameter search included:
 - Weight decay
 - Number of training epochs
 
-The best configuration found for the CNN was:
+The best CNN configuration was:
 
 | Hyperparameter | Value |
 |---|---:|
@@ -170,6 +179,8 @@ The best configuration found for the CNN was:
 The MLP was also optimized using Optuna.
 
 Hyperparameter tuning was performed using validation accuracy, while the final model performance was evaluated on the separate official test set.
+
+---
 
 ## 🗂️ Dataset
 
@@ -187,45 +198,48 @@ The official training set was divided into:
 ```text
 48,000 → Training
 12,000 → Validation
-
 10,000 → Official Test Set
 ```
+
+---
 
 ## 🏗️ Application Architecture
 
 The application follows a simple client-server architecture.
 
 ```text
-                    ┌──────────────────┐
-                    │  React Frontend  │
-                    └────────┬─────────┘
-                             │
-                             │ HTTP
-                             ▼
-                    ┌──────────────────┐
-                    │     FastAPI      │
-                    │                  │
-                    │   GET /health    │
-                    │   POST /predict  │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │    Predictor     │
-                    └────────┬─────────┘
-                             │
-                    ┌────────┴────────┐
-                    ▼                 ▼
-              ┌──────────┐      ┌──────────┐
-              │   CNN    │      │   MLP    │
-              │  .pth    │      │  .pth    │
-              └────┬─────┘      └────┬─────┘
-                   │                 │
-                   └────────┬────────┘
-                            ▼
-                       Prediction
-
+                 ┌──────────────────┐
+                 │  React Frontend  │
+                 └────────┬─────────┘
+                          │
+                         HTTP
+                          ↓
+                 ┌──────────────────┐
+                 │     FastAPI      │
+                 │                  │
+                 │   GET /health    │
+                 │   POST /predict  │
+                 └────────┬─────────┘
+                          │
+                          ↓
+                 ┌──────────────────┐
+                 │    Predictor     │
+                 └────────┬─────────┘
+                          │
+                 ┌────────┴────────┐
+                 ↓                 ↓
+          ┌──────────┐       ┌──────────┐
+          │   CNN    │       │   MLP    │
+          │   .pth   │       │   .pth   │
+          └────┬─────┘       └────┬─────┘
+               │                  │
+               └────────┬─────────┘
+                        ↓
+                    Prediction
 ```
+
+---
+
 ## 🌐 Web Application
 
 The React frontend provides an interactive interface for model inference.
@@ -260,61 +274,7 @@ The frontend communicates with the FastAPI backend through HTTP requests.
 
 ![Model Comparison](screenshots/model-comparison.png)
 
-## 🖥️ Application Preview
-
-### Model Selection
-
-![Model Selection](screenshots/homepage.png)
-
-### Prediction
-
-![Prediction](screenshots/cnn-prediction.png)
-
-### Model Comparison
-
-![Model Comparison](screenshots/model-comparison.png)
-```
-
-This is **very valuable for GitHub** because recruiters can understand the project without running it.
-
 ---
-
-
-# 🎯 Where your project stands now
-
-You went from:
-
-```text
-Notebook
-   ↓
-Model
-```
-
-to:
-
-```text
-                  GitHub
-                    │
-          ┌─────────┴─────────┐
-          ↓                   ↓
-       Vercel               Render
-          │                   │
-       React              Docker
-          │                   │
-          └────── HTTPS ──────┘
-                              │
-                           FastAPI
-                              │
-                       ┌──────┴──────┐
-                       ↓             ↓
-                      CNN           MLP
-                       │             │
-                       └──────┬──────┘
-                              ↓
-                         Prediction
-```
-
-That's a **legitimate end-to-end ML application**, not just a model notebook.
 
 ## 🔌 API
 
@@ -325,6 +285,71 @@ The backend is implemented using **FastAPI**.
 ```http
 GET /health
 ```
+
+Example response:
+
+```json
+{
+  "status": "healthy"
+}
+```
+
+### Prediction
+
+```http
+POST /predict
+```
+
+The endpoint accepts:
+
+- Image file
+- Model selection: `cnn` or `mlp`
+
+Supported image formats:
+
+- PNG
+- JPEG
+- WebP
+
+Maximum file size:
+
+```text
+5 MB
+```
+
+Example response:
+
+```json
+{
+  "model": "cnn",
+  "class": "T-shirt/top",
+  "confidence": 0.946,
+  "top_predictions": [
+    {
+      "class": "T-shirt/top",
+      "probability": 0.946
+    },
+    {
+      "class": "Bag",
+      "probability": 0.054
+    },
+    {
+      "class": "Pullover",
+      "probability": 0.000
+    }
+  ]
+}
+```
+
+### API Documentation
+
+Swagger UI is available at:
+
+```text
+https://fashion-mnist-api-oq1v.onrender.com/docs
+```
+
+---
 
 ## 📁 Project Structure
 
@@ -367,6 +392,8 @@ fashion-mnist-classifier/
 └── README.md
 ```
 
+---
+
 ## ⚙️ Local Setup
 
 ### Prerequisites
@@ -401,6 +428,18 @@ Activate it on Windows:
 pip install -r requirements.txt
 ```
 
+Install the CPU version of PyTorch separately:
+
+```bash
+pip install torch==2.13.0 --index-url https://download.pytorch.org/whl/cpu
+```
+
+For notebook/evaluation work, install scikit-learn if needed:
+
+```bash
+pip install scikit-learn
+```
+
 ### 4. Start the FastAPI backend
 
 ```bash
@@ -421,6 +460,8 @@ http://127.0.0.1:8000/docs
 
 ### 5. Start the frontend
 
+Open another terminal:
+
 ```bash
 cd frontend
 npm install
@@ -432,6 +473,8 @@ The frontend will be available at:
 ```text
 http://localhost:8080
 ```
+
+---
 
 ## 🐳 Docker
 
@@ -462,6 +505,14 @@ Swagger documentation:
 ```text
 http://127.0.0.1:8000/docs
 ```
+
+---
+
+## 🧪 Testing
+
+Run the API test suite with:
+
+```bash
 pytest
 ```
 
@@ -479,16 +530,8 @@ Current result:
 5 passed
 ```
 
-
-That accurately matches your CPU deployment.
-
 ---
 
-## 3️⃣ Add Deployment section
-
-Put this **after Docker**:
-
-````markdown
 ## 🚀 Deployment
 
 The application is deployed using separate frontend and backend services.
@@ -496,15 +539,34 @@ The application is deployed using separate frontend and backend services.
 ```text
 React Frontend
       ↓
-    Vercel
+   Vercel
       ↓ HTTPS
 FastAPI Backend
       ↓
-    Render
+   Render
       ↓
 Docker + PyTorch
       ↓
 CNN / MLP Models
+```
+
+### Frontend
+
+Deployed using Vercel.
+
+### Backend
+
+Deployed using Render with Docker.
+
+### Live Application
+
+https://fashion-mnist-classifier-chi.vercel.app
+
+### API Documentation
+
+https://fashion-mnist-api-oq1v.onrender.com/docs
+
+---
 
 ## ⚠️ Limitations
 
@@ -523,6 +585,7 @@ The confidence displayed by the application represents the model's **softmax out
 
 The application is primarily intended as a demonstration of an end-to-end machine learning inference system.
 
+---
 
 ## 🚧 Future Improvements
 
@@ -539,6 +602,8 @@ Potential improvements include:
 - Production deployment
 - Monitoring and logging
 
+---
+
 ## 🛠️ Tech Stack
 
 | Technology | Purpose |
@@ -554,6 +619,8 @@ Potential improvements include:
 | NumPy | Numerical Processing |
 | Pillow | Image Processing |
 | scikit-learn | Evaluation Metrics |
+
+---
 
 ## 📌 Key Takeaway
 
@@ -579,13 +646,18 @@ React
 Docker
    ↓
 Deployable ML Application
-
 ```
+
+---
 
 ## 🚀 Live Demo
 
-**Live Application:** https://fashion-mnist-classifier-chi.vercel.app
+**Live Application:**
 
-**API Documentation:** https://fashion-mnist-api-oq1v.onrender.com/docs
+https://fashion-mnist-classifier-chi.vercel.app
+
+**API Documentation:**
+
+https://fashion-mnist-api-oq1v.onrender.com/docs
 
 The application runs a React frontend connected to a Dockerized FastAPI backend serving PyTorch models.
